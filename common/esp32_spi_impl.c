@@ -70,7 +70,7 @@ void init_esp32_spi(){
 
     //GPIO config for the handshake line.
     gpio_config_t io_conf={
-        .intr_type=GPIO_PIN_INTR_NEGEDGE,
+        .intr_type=GPIO_INTR_NEGEDGE,
         .mode=GPIO_MODE_INPUT,
         .pull_up_en=1,
         .pin_bit_mask=(1<<GPIO_HANDSHAKE)
@@ -82,7 +82,7 @@ void init_esp32_spi(){
     //Set up handshake line interrupt.
     gpio_config(&io_conf);
     gpio_install_isr_service(0);
-    gpio_set_intr_type(GPIO_HANDSHAKE, GPIO_PIN_INTR_NEGEDGE);
+    gpio_set_intr_type(GPIO_HANDSHAKE, GPIO_INTR_NEGEDGE);
     gpio_isr_handler_add(GPIO_HANDSHAKE, gpio_handshake_isr_handler, NULL);
 
     //Initialize the SPI bus and add the device we want to send stuff to.
